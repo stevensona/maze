@@ -8,7 +8,7 @@ Based on material presented in [Mazes for Programmers](https://pragprog.com/book
 Maze.Grid.new(10,10) |> Maze.Gen.BinaryTree.on |> Maze.Rend.png("binarytree.png")
 ```
 
-<img src="binarytree.png" width="200/>
+<img src="binarytree.png" width="210">
 
 ### Sidewinder
 
@@ -16,7 +16,7 @@ Maze.Grid.new(10,10) |> Maze.Gen.BinaryTree.on |> Maze.Rend.png("binarytree.png"
 Maze.Grid.new(10,10) |> Maze.Gen.Sidewinder.on |> Maze.Rend.png("sidewinder.png")
 ```
 
-<img src="sidewinder.png" width="200/>
+<img src="sidewinder.png" width="210">
 
 ## Installation
 
