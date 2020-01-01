@@ -1,0 +1,6 @@
+%{
+  "libgraph": {:hex, :libgraph, "0.13.3", "20732b7bafb933dcf7351c479e03076ebd14a85fd3202c67a1c197f4f7c2466b", [:mix], [], "hexpm"},
+  "png": {:hex, :png, "0.1.1", "57eeab907d4c2b78d4c3803bc355af025248db9ebd612e4275c3cab65b809171", [:rebar], [], "hexpm"},
+  "vivid": {:hex, :vivid, "0.4.3", "ea0abddb41a1ac778392c05f11c70118a5d36d71f0dee9e4b10bcb757a54f1c2", [:mix], [], "hexpm"},
+  "vivid_png": {:hex, :vivid_png, "0.1.1", "595333c21a9486944c555a2bdf01894e101730f6ad7e1fd59085491c82db0177", [:mix], [{:png, "~> 0.1.1", [hex: :png, repo: "hexpm", optional: false]}, {:vivid, ">= 0.3.0", [hex: :vivid, repo: "hexpm", optional: false]}], "hexpm"},
+}
