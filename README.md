@@ -1,6 +1,22 @@
 # Maze
 
-**TODO: Add description**
+Generate and render mazes with Elixir.
+Based on material presented in [Mazes for Programmers](https://pragprog.com/book/jbmaze/mazes-for-programmers)
+### Binary Tree
+
+```
+Maze.Grid.new(10,10) |> Maze.Gen.BinaryTree.on |> Maze.Rend.png("binarytree.png")
+```
+
+![](./binarytree.png | width=200)
+
+### Sidewinder
+
+```
+Maze.Grid.new(10,10) |> Maze.Gen.Sidewinder.on |> Maze.Rend.png("sidewinder.png")
+```
+
+![](./sidewinder.png | width=200)
 
 ## Installation
 
