@@ -25,7 +25,7 @@ defmodule Maze.Gen.Sidewinder do
        }) do
     current_run = MapSet.put(current_run, {x, y})
 
-    case action(grid, x, y) do
+    case action(grid, {x, y}) do
       :end_run ->
         [{x, y}] = Enum.take_random(current_run, 1)
         %{current_run: MapSet.new(), grid: Grid.connect(grid, {x, y}, {x, y + 1})}
@@ -38,7 +38,7 @@ defmodule Maze.Gen.Sidewinder do
     end
   end
 
-  defp action(%Grid{height: height, width: width}, x, y) do
+  defp action(%Grid{height: height, width: width}, {x, y}) do
     cond do
       x == width - 1 && y == height - 1 ->
         :noop

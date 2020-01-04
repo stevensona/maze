@@ -18,6 +18,14 @@ Maze.Grid.new(10,10) |> Maze.Gen.Sidewinder.on |> Maze.Rend.png("sidewinder.png"
 
 <img src="sidewinder.png" width="210">
 
+### Aldous Broder
+
+```
+Maze.Grid.new(10,10) |> Maze.Gen.AldousBroder.on |> Maze.Rend.png("aldous_broder.png")
+```
+
+<img src="aldous_broder.png" width="210">
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
