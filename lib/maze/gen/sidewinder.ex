@@ -1,12 +1,13 @@
 defmodule Maze.Gen.Sidewinder do
   alias Maze.Grid
 
-  def on(%Grid{row_count: row_count, column_count: column_count} = grid) do
+  @spec on(%Grid{}) :: %Grid{}
+  def on(%Grid{} = grid) do
     current_run = MapSet.new()
-    cells = for r <- 0..(row_count - 1), c <- 0..(column_count - 1), do: {r, c}
 
     %{grid: grid} =
-      cells
+      grid
+      |> Grid.cells()
       |> Enum.reduce(
         %{
           current_run: current_run,
@@ -18,42 +19,43 @@ defmodule Maze.Gen.Sidewinder do
     grid
   end
 
-  defp do_run({row, column}, %{
+  defp do_run({x, y}, %{
          current_run: current_run,
-         grid: %Grid{row_count: row_count, column_count: column_count} = grid
+         grid: %Grid{} = grid
        }) do
-    result =
-      cond do
-        column == column_count - 1 && row == row_count - 1 ->
-          :nop
+    current_run = MapSet.put(current_run, {x, y})
 
-        column == column_count - 1 ->
-          :heads
+    case action(grid, x, y) do
+      :end_run ->
+        [{x, y}] = Enum.take_random(current_run, 1)
+        %{current_run: MapSet.new(), grid: Grid.connect(grid, {x, y}, {x, y + 1})}
 
-        row == row_count - 1 ->
-          :tails
-
-        true ->
-          coinflip()
-      end
-
-    current_run = MapSet.put(current_run, {row, column})
-
-    case result do
-      :heads ->
-        [{r, c}] = Enum.take_random(current_run, 1)
-        %{current_run: MapSet.new(), grid: Grid.connect(grid, {r, c}, {r + 1, c})}
-
-      :tails ->
-        %{current_run: current_run, grid: Grid.connect(grid, {row, column}, {row, column + 1})}
+      :continue_run ->
+        %{current_run: current_run, grid: Grid.connect(grid, {x, y}, {x + 1, y})}
 
       _ ->
         %{current_run: MapSet.new(), grid: grid}
     end
   end
 
+  defp action(%Grid{height: height, width: width}, x, y) do
+    cond do
+      x == width - 1 && y == height - 1 ->
+        :noop
+
+      x == width - 1 ->
+        :end_run
+
+      y == height - 1 ->
+        :continue_run
+
+      true ->
+        coinflip()
+    end
+  end
+
   defp coinflip do
-    [result] = Enum.take_random([:heads, :tails], 1)
+    [result] = Enum.take_random([:end_run, :continue_run], 1)
     result
   end
 end

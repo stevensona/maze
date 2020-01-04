@@ -11,13 +11,13 @@ defmodule Maze.Rend do
     grid |> render |> IO.puts()
   end
 
-  defp render(%Grid{doors: doors, row_count: row_count, column_count: column_count}) do
+  defp render(%Grid{doors: doors, width: width, height: height}) do
     doors
     |> Enum.reduce(
-      Frame.init(column_count * 2 + 1, row_count * 2 + 1, RGBA.black()),
+      Frame.init(width * 2 + 1, height * 2 + 1, RGBA.black()),
       fn %MapSet{} = door, frame ->
         # dig out the doors
-        [{y1, x1}, {y2, x2}] = MapSet.to_list(door)
+        [{x1, y1}, {x2, y2}] = MapSet.to_list(door)
 
         Frame.push(
           frame,

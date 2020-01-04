@@ -1,13 +1,13 @@
 defmodule Maze.Grid do
-  defstruct [:doors, :row_count, :column_count]
+  defstruct [:doors, :width, :height]
 
   alias __MODULE__
 
-  def new(row_count \\ 4, column_count \\ 4) do
+  def new(width \\ 4, height \\ 4) do
     %Grid{
       doors: MapSet.new(),
-      row_count: row_count,
-      column_count: column_count
+      width: width,
+      height: height
     }
   end
 
@@ -19,7 +19,7 @@ defmodule Maze.Grid do
     MapSet.member?(doors, MapSet.new([a, b]))
   end
 
-  defp cells(rows, columns) do
-    for i <- 0..(rows - 1), j <- 0..(columns - 1), do: {i, j}
+  def cells(%Grid{width: width, height: height}) do
+    for y <- 0..(height - 1), x <- 0..(width - 1), do: {x, y}
   end
 end
